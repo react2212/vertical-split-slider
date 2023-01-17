@@ -381,4 +381,39 @@ figure .btnDown:hover em {
   opacity: 1;
 }
 
+@media screen and (max-width: 845px) {
+  header nav {
+    display: none;
+  }
+  header .fa-bars {
+    opacity: 1;
+    right: 7vw;
+  }
+  figure .panel li .txt h2 {
+    font-size: 12vw;
+  }
+  figure .btnUp {
+    margin-right: 0px;
+    bottom: calc(10vh + 100px);
+  }
+  figure .btnUp::before, figure .btnUp::after,
+  figure .btnUp span {
+    background: #fff;
+  }
+  figure .btnUp em {
+    color: #fff;
+  }
+  figure .btnDown {
+    margin-right: 0px;
+    bottom: 10vh;
+  }
+  figure .btnDown::before, figure .btnDown::after,
+  figure .btnDown span {
+    background: #fff;
+  }
+  figure .btnDown em {
+    color: #fff;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

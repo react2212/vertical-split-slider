@@ -421,3 +421,47 @@ figure {
 		}
 	}
 }
+
+@media screen and (max-width: 845px) {
+	header {
+		nav {
+			display: none;
+		}
+		.fa-bars {
+			opacity: 1;
+			right: 7vw;
+		}
+	}
+
+	figure {
+		.panel li .txt h2 {
+			font-size: 12vw;
+		}
+		.btnUp {
+			margin-right: 0px;
+			bottom: calc(10vh + 100px);
+
+			&::before,
+			&::after,
+			span {
+				background: #fff;
+			}
+			em {
+				color: #fff;
+			}
+		}
+		.btnDown {
+			margin-right: 0px;
+			bottom: 10vh;
+
+			&::before,
+			&::after,
+			span {
+				background: #fff;
+			}
+			em {
+				color: #fff;
+			}
+		}
+	}
+}
