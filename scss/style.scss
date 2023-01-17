@@ -1,2 +1,325 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import 'reset';
+
+header {
+	width: 100%;
+	height: 13vh;
+	padding: 0 7vw;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 3;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: center;
+	overflow: hidden;
+
+	h1 {
+		display: flex;
+		align-items: center;
+
+		a {
+			font: bold 20px/1 'arial';
+			color: #333;
+		}
+	}
+
+	nav {
+		display: flex;
+		gap: 100px;
+
+		#gnb {
+			display: flex;
+			gap: 40px;
+
+			a {
+				font: 12px/1 'arial';
+				color: #555;
+			}
+		}
+
+		.sns {
+			display: flex;
+			gap: 20px;
+
+			a {
+				font-size: 12px;
+				color: #777;
+			}
+		}
+	}
+
+	.fa-bars {
+		font-size: 20px;
+		color: #333;
+		position: absolute;
+		top: 50%;
+		right: 7vw;
+		transform: translateY(-50%);
+		cursor: pointer;
+		opacity: 0;
+		transition: 0.5s;
+	}
+}
+
+figure {
+	width: 100%;
+	height: 100vh;
+	position: relative;
+	padding: 13vh 7vw 8vh;
+	overflow: hidden;
+
+	.panel {
+		width: 100%;
+		height: 100%;
+		position: relative;
+
+		li {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: 1;
+
+			.bg {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0;
+				background-position: -9999px;
+				background-repeat: no-repeat;
+				background-size: cover;
+				transition: 0.8s;
+
+				&::before,
+				&::after {
+					content: '';
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					background-image: inherit;
+					background-size: inherit;
+					background-repeat: inherit;
+					background-position: center;
+					z-index: 2;
+					transition: margin-top 0.6s;
+				}
+				&::before {
+					clip-path: polygon(0% 0%, 50% 0%, 50% 100%, 0% 100%);
+					margin-top: -100px;
+				}
+				&::after {
+					clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+					margin-top: 100px;
+				}
+
+				.shadow {
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background-position: center;
+					background-image: inherit;
+					background-repeat: inherit;
+					background-size: inherit;
+					z-index: 1;
+					margin-top: 40px;
+					transform: scale(0.95);
+					filter: blur(20px);
+					opacity: 0.7;
+				}
+			}
+		}
+
+		//활성화 패널
+		li.on {
+			z-index: 2;
+
+			.bg {
+				opacity: 1;
+				transform: translateY(0%) scale(1);
+				//브라우저 리사이즈시 혹시라도 보일지모를 가운데 간격을 메꿔주기 위해
+				//해당 패널이 활성화 되었을때만 밑에 이미지를 보여줌
+				background-position: center;
+
+				&::before,
+				&::after {
+					margin-top: 0;
+				}
+			}
+		}
+
+		//위로 사라지는 비활성화 패널
+		li.up {
+			.bg {
+				opacity: 0;
+				transform: translateY(-80%) scale(0.7);
+			}
+		}
+
+		//아래로 사라지는 비활성화 패널
+		li.down {
+			.bg {
+				opacity: 0;
+				transform: translateY(80%) scale(0.7);
+			}
+		}
+	}
+
+	.btnUp {
+		display: block;
+		width: 61px;
+		height: 50px;
+		position: absolute;
+		right: 7vw;
+		margin-right: -60px;
+		bottom: calc(8vh + 100px);
+		transform: scale(0.8);
+		z-index: 3;
+		transition-property: bottom, right;
+		transition-duration: 0.5s;
+
+		&::before,
+		&::after {
+			content: '';
+			display: block;
+			width: 1px;
+			height: 20px;
+			background: #333;
+			position: absolute;
+			left: 50%;
+			top: 0;
+			transform-origin: center top;
+			transition: 0.5s 0.2s;
+		}
+
+		&::before {
+			transform: rotate(45deg);
+		}
+		&::after {
+			transform: rotate(-45deg);
+		}
+		span {
+			display: block;
+			width: 1px;
+			height: 40px;
+			background: #333;
+			position: absolute;
+			left: 50%;
+			top: 0;
+			transition: 0.5s;
+		}
+		em {
+			font: 12px/1 'arial';
+			color: #111;
+			text-align: center;
+			letter-spacing: 1px;
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			transform: translateX(-50%);
+			opacity: 0;
+			transition: 0.5s;
+		}
+
+		&:hover {
+			&::before {
+				transform: rotate(45deg) translateY(-40px);
+				opacity: 0;
+			}
+			&::after {
+				transform: rotate(-45deg) translateY(-40px);
+				opacity: 0;
+			}
+			span {
+				transform: translateY(-40px);
+				opacity: 0;
+			}
+			em {
+				top: 50%;
+				opacity: 1;
+			}
+		}
+	}
+
+	.btnDown {
+		display: block;
+		width: 61px;
+		height: 50px;
+		position: absolute;
+		right: 7vw;
+		margin-right: -60px;
+		bottom: 8vh;
+		transform: scale(0.8);
+		z-index: 3;
+		transition-property: bottom, right;
+		transition-duration: 0.5s;
+
+		&::before,
+		&::after {
+			content: '';
+			display: block;
+			width: 1px;
+			height: 20px;
+			background: #333;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform-origin: center bottom;
+			transition: 0.5s 0.2s;
+		}
+		&::before {
+			transform: rotate(-45deg);
+		}
+		&::after {
+			transform: rotate(45deg);
+		}
+		span {
+			display: block;
+			width: 1px;
+			height: 40px;
+			background: #333;
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transition: 0.5s;
+		}
+		em {
+			font: 12px/1 'orbitron';
+			color: #111;
+			letter-spacing: 2px;
+			position: absolute;
+			top: -100%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			opacity: 0;
+			transition: 0.5s;
+		}
+
+		&:hover {
+			&::before {
+				transform: rotate(-45deg) translateY(40px);
+				opacity: 0;
+			}
+			&::after {
+				transform: rotate(45deg) translateY(40px);
+				opacity: 0;
+			}
+			span {
+				transform: translateY(40px);
+				opacity: 0;
+			}
+			em {
+				top: 50%;
+				opacity: 1;
+			}
+		}
+	}
+}
