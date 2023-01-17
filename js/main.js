@@ -6,6 +6,7 @@ const btnDown = document.querySelector('.btnDown');
 const len = panel_li.length;
 const delay = 600;
 
+panel_li.forEach((li) => splitTxt(li.querySelector('h2')));
 btnUp.addEventListener('click', moveUp);
 btnDown.addEventListener('click', moveDown);
 
@@ -43,4 +44,12 @@ function moveDown(e) {
 		panel_li[prev_index].classList.add('on');
 		panel.querySelector('.down').classList.remove('down');
 	}, delay);
+}
+
+function splitTxt(el) {
+	const txt = el.innerText;
+	let tags = '';
+	let num = 0;
+	for (const el of txt) tags += `<span style='transition-delay: ${0.1 * num++}s'>${el}</span>`;
+	el.innerHTML = tags;
 }
